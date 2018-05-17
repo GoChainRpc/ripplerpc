@@ -43,18 +43,20 @@ func NewGetAccountTxCmd(account string, ledger_index int64) *GetAccountTxCmd {
 	}
 }
 
+type TxJSON struct {
+	Account         string `json:"Account"`
+	Amount          string `json:"Amount"`
+	Destination     string `json:"Destination"`
+	TransactionType string `json:"TransactionType"`
+	DestinationTag  int64  `json:"DestinationTag"`
+}
+
 // SendToAddressCmd defines the sendtoaddress JSON-RPC command.
 type SubmitCmd struct {
-	Offline bool   `json:"offline"`
-	Secret  string `json:"secret"`
-	TxJSON struct {
-		Account         string `json:"Account"`
-		Amount          string `json:"Amount"`
-		Destination     string `json:"Destination"`
-		TransactionType string `json:"TransactionType"`
-		DestinationTag  int64  `json:"DestinationTag"`
-	} `json:"tx_json"`
-	FeeMultMax int `json:"fee_mult_max"`
+	Offline    bool   `json:"offline"`
+	Secret     string `json:"secret"`
+	TxJSON     TxJSON `json:"tx_json"`
+	FeeMultMax int    `json:"fee_mult_max"`
 }
 
 // NewSendToAddressCmd returns a new instance which can be used to issue a
@@ -63,20 +65,17 @@ type SubmitCmd struct {
 // The parameters which are pointers indicate they are optional.  Passing nil
 // for optional parameters will use the default value.
 func NewSubmitCmd(account, secret, amount, destination string, destination_tag int64) *SubmitCmd {
+	txJson := TxJSON{
+		Account:         account,
+		Amount:          amount,
+		Destination:     destination,
+		TransactionType: "Payment",
+		DestinationTag:  destination_tag,
+	}
 	return &SubmitCmd{
-		Offline: false,
-		Secret:  secret,
-		TxJSON: struct {
-			Account         string
-			Amount          string
-			Destination     string
-			TransactionType string
-			DestinationTag  int64
-		}{Account: account,
-			Amount: amount,
-			Destination: destination,
-			TransactionType: "Payment",
-			DestinationTag: destination_tag},
+		Offline:    false,
+		Secret:     secret,
+		TxJSON:     txJson,
 		FeeMultMax: 1000,
 	}
 }
