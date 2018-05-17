@@ -30,7 +30,7 @@ type SubmitResult struct {
 		Account         string `json:"Account"`
 		Amount          string `json:"Amount"`
 		Destination     string `json:"Destination"`
-		DestinationTag  int    `json:"DestinationTag"`
+		DestinationTag  int64  `json:"DestinationTag"`
 		Fee             string `json:"Fee"`
 		Flags           int64  `json:"Flags"`
 		Sequence        int    `json:"Sequence"`
@@ -45,17 +45,17 @@ type GetTxResult struct {
 	Account         string `json:"Account"`
 	Amount          string `json:"Amount"`
 	Destination     string `json:"Destination"`
-	DestinationTag  int    `json:"DestinationTag"`
+	DestinationTag  int64  `json:"DestinationTag"`
 	Fee             string `json:"Fee"`
 	Flags           int64  `json:"Flags"`
 	Sequence        int    `json:"Sequence"`
 	SigningPubKey   string `json:"SigningPubKey"`
 	TransactionType string `json:"TransactionType"`
 	TxnSignature    string `json:"TxnSignature"`
-	Date            int    `json:"date"`
+	Date            int64  `json:"date"`
 	Hash            string `json:"hash"`
-	InLedger        int    `json:"inLedger"`
-	LedgerIndex     int    `json:"ledger_index"`
+	InLedger        int64  `json:"inLedger"`
+	LedgerIndex     int64  `json:"ledger_index"`
 	Meta struct {
 		AffectedNodes []struct {
 			ModifiedNode struct {
@@ -72,7 +72,7 @@ type GetTxResult struct {
 					Balance string `json:"Balance"`
 				} `json:"PreviousFields"`
 				PreviousTxnID     string `json:"PreviousTxnID"`
-				PreviousTxnLgrSeq int    `json:"PreviousTxnLgrSeq"`
+				PreviousTxnLgrSeq int64  `json:"PreviousTxnLgrSeq"`
 			} `json:"ModifiedNode"`
 		} `json:"AffectedNodes"`
 		TransactionIndex  int    `json:"TransactionIndex"`
@@ -85,8 +85,8 @@ type GetTxResult struct {
 
 type GetAccountTxResult struct {
 	Account        string `json:"account"`
-	LedgerIndexMax int    `json:"ledger_index_max"`
-	LedgerIndexMin int    `json:"ledger_index_min"`
+	LedgerIndexMax int64    `json:"ledger_index_max"`
+	LedgerIndexMin int64    `json:"ledger_index_min"`
 	Status         string `json:"status"`
 	Transactions []struct {
 		Meta struct {
@@ -105,7 +105,7 @@ type GetAccountTxResult struct {
 						Balance string `json:"Balance"`
 					} `json:"PreviousFields"`
 					PreviousTxnID     string `json:"PreviousTxnID"`
-					PreviousTxnLgrSeq int    `json:"PreviousTxnLgrSeq"`
+					PreviousTxnLgrSeq int64    `json:"PreviousTxnLgrSeq"`
 				} `json:"ModifiedNode"`
 			} `json:"AffectedNodes"`
 			TransactionIndex  int    `json:"TransactionIndex"`
@@ -125,7 +125,7 @@ type GetAccountTxResult struct {
 			TxnSignature    string `json:"TxnSignature"`
 			Date            int64  `json:"date"`
 			Hash            string `json:"hash"`
-			InLedger        int    `json:"inLedger"`
+			InLedger        int64    `json:"inLedger"`
 			LedgerIndex     int64  `json:"ledger_index"`
 		} `json:"tx"`
 		Validated bool `json:"validated"`
