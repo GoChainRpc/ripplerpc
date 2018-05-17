@@ -24,4 +24,18 @@ func main() {
 	} else {
 		log.Println("account info :", result)
 	}
+
+	resultAcounttx, err := client.GetAccountTx("rDu13xhh9pwc55Gpe8Gec9818YCBD8ZqJ7", -1)
+	if err != nil {
+		log.Fatal(err)
+	} else {
+		log.Println("account tx :", resultAcounttx)
+	}
+
+	tx, err := client.GetTx("2CA49646665A08B9560F5D6E91B6BED1C58B6CD0C8742BACD73EC74D076BD858")
+	if err != nil {
+		log.Fatal(err)
+	} else {
+		log.Println(" tx :", tx)
+	}
 }
